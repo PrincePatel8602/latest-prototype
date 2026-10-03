@@ -1,0 +1,14 @@
+# httpx is a RUNTIME dependency from Phase 4 (calls to external APIs) and is also used by the tests.
+# Later phases add langchain, numpy, pandas, etc. when needed.
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2.8
+pydantic-settings>=2.4
+httpx>=0.27
+pytest>=8.0
+langgraph>=0.2
+# Phase 11 historical foundation (PostgreSQL source of truth + Pinecone semantic layer)
+sqlalchemy>=2.0,<3
+psycopg[binary]>=3.1,<4        # DATABASE_URL=postgresql://... is rewritten to the psycopg 3 driver automatically
+pinecone>=6,<10                # integrated-embedding API; tested with 9.1.0
+python-dotenv>=1.0
