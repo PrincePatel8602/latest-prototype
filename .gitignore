@@ -1,0 +1,27 @@
+# secrets: NEVER commit
+.env
+.env.local
+.env.*.local
+env
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# node / next
+node_modules/
+.next/
+*.tsbuildinfo
+
+# regenerable data: re-created by backend/scripts/import_*.py and run_event_study.py
+backend/data/raw/*
+backend/data/processed/*
+backend/data/normalized/*
+backend/data/*.sqlite
+
+# generated / local
+repomix-output.xml
+/data/

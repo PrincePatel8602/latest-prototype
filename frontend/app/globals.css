@@ -1,0 +1,273 @@
+@import "tailwindcss";
+
+/* =========================================================
+   FinSight AI — design tokens
+   One accent (azure). Green / red / amber are reserved for
+   meaning (up / down / caution) and never used decoratively.
+   ========================================================= */
+
+@theme {
+  --color-bg: #08090c;
+  --color-bg-elev: #0c0e13;
+  --color-surface: #101319;
+  --color-surface-2: #151922;
+  --color-line: #232834;
+  --color-line-soft: #1a1e28;
+
+  --color-ink: #f4f5f7;
+  --color-ink-2: #c9cdd6;
+  --color-muted: #8b92a1;
+  --color-subtle: #5d6472;
+
+  --color-accent: #6ea8ff;
+  --color-accent-strong: #4f8cff;
+
+  --color-up: #4ade9b;
+  --color-down: #ff7a7a;
+  --color-warn: #f5c45e;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  background: var(--color-bg);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01" on, "cv11" on;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(110, 168, 255, 0.28);
+  color: #fff;
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+
+  /* numbers always align */
+  .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  /* ---------- typography scale ---------- */
+  .display {
+    font-size: clamp(2.6rem, 7vw, 5.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    font-weight: 600;
+  }
+
+  .h1 {
+    font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+  }
+
+  .h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    line-height: 1.12;
+    letter-spacing: -0.028em;
+    font-weight: 600;
+  }
+
+  .h3 {
+    font-size: 1.125rem;
+    line-height: 1.3;
+    letter-spacing: -0.012em;
+    font-weight: 600;
+  }
+
+  .lead {
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    line-height: 1.55;
+    color: var(--color-muted);
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .text-fade {
+    background: linear-gradient(180deg, #ffffff 0%, #9aa3b5 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-accent-fade {
+    background: linear-gradient(100deg, #cfe0ff 0%, var(--color-accent) 55%, #9db8ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ---------- surfaces ---------- */
+  .surface {
+    background: linear-gradient(180deg, rgba(21, 25, 34, 0.72) 0%, rgba(16, 19, 25, 0.72) 100%);
+    border: 1px solid var(--color-line);
+    border-radius: 20px;
+  }
+
+  .surface-flat {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line-soft);
+    border-radius: 16px;
+  }
+
+  .glass {
+    background: rgba(16, 19, 25, 0.62);
+    backdrop-filter: saturate(160%) blur(18px);
+    -webkit-backdrop-filter: saturate(160%) blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 30px 60px -30px rgba(0, 0, 0, 0.7);
+  }
+
+  .hairline {
+    border-color: var(--color-line);
+  }
+
+  /* ---------- ambient ---------- */
+  .orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  .grid-fade {
+    background-image: linear-gradient(var(--color-line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--color-line-soft) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 20%, transparent 75%);
+    opacity: 0.55;
+  }
+
+}
+
+/* ---------- the one repeating motion: data moving along a line ---------- */
+@keyframes flow {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 200% 0;
+  }
+}
+
+.flow-line {
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+  animation: flow 1.6s linear infinite;
+}
+
+@keyframes breathe {
+
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.breathe {
+  animation: breathe 1.8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--color-surface) 25%, var(--color-surface-2) 50%, var(--color-surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* details/summary used for progressive disclosure */
+details>summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+details>summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] .chev {
+  transform: rotate(180deg);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* respect the OS setting everywhere, including CSS-only animation */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .flow-line,
+  .breathe,
+  .skeleton {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

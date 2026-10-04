@@ -1,0 +1,5 @@
+# Add to backend/requirements.txt (only what Phase 11 needs; pandas is NOT required)
+sqlalchemy>=2.0,<3
+psycopg[binary]>=3.1,<4        # PostgreSQL driver -> DATABASE_URL=postgresql+psycopg://...
+pinecone>=6,<10                # integrated-embedding API (create_index_for_model / upsert_records / search); pin to what you test
+python-dotenv>=1.0             # optional: lets scripts/import_ibtracs.py read backend/.env
